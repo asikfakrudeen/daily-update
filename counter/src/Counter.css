@@ -1,0 +1,167 @@
+/* Counter.css */
+:root {
+  --background: #f3f4f6;         /* Light gray background */
+  --card: #ffffff;               /* Clean white card */
+  --primary: #2563eb;            /* Bright blue */
+  --secondary: #10b981;          /* Teal/green accent */
+  --danger: #ef4444;             /* Red for decrement */
+  --text: #111827;               /* Dark readable text */
+  --muted: #6b7280;              /* Gray for subtle elements */
+  --radius: 12px;
+  --shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Page background / container centering */
+.counter-container {
+  min-height: 220px;
+  width: min(520px, 92%);
+  margin: 40px auto;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(245,247,250,0.6));
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  backdrop-filter: blur(6px) saturate(120%);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+/* Big, elegant counter number */
+.counter-container h1 {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.25rem); /* responsive */
+  letter-spacing: -0.02em;
+  color: var(--text);
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  transition: transform var(--transition), filter var(--transition);
+  will-change: transform;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Slight emphasis animation when number changes (toggle by adding class via JS if desired) */
+.counter-container.hit h1 {
+  transform: translateY(-4px) scale(1.02);
+  filter: drop-shadow(0 6px 18px rgba(43,110,246,0.14));
+}
+
+/* Button group layout */
+.button-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Base button styles */
+.button-group button {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition), background-color var(--transition);
+  box-shadow: 0 6px 18px rgba(12, 20, 40, 0.06);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 110px;
+  justify-content: center;
+}
+
+/* Primary (Increment) */
+.button-group button:nth-child(1) {
+  background: linear-gradient(90deg, var(--accent-1), #4a85f8);
+  color: white;
+  border: 1px solid rgba(43,110,246,0.15);
+}
+
+/* Reset (middle) */
+.button-group button:nth-child(2) {
+  background: linear-gradient(90deg, #ffffff, #f7fafc);
+  color: var(--muted);
+  border: 1px solid rgba(16,24,40,0.06);
+  font-weight: 700;
+}
+
+/* Decrement (last) */
+.button-group button:nth-child(3) {
+  background: linear-gradient(90deg, #ff6b6b, #ff8a7a);
+  color: white;
+  border: 1px solid rgba(255,107,107,0.12);
+}
+
+/* Hover / active states */
+.button-group button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(12, 20, 40, 0.10);
+}
+
+.button-group button:active {
+  transform: translateY(-1px) scale(0.995);
+}
+
+.button-group button:focus {
+  outline: 3px solid rgba(43,110,246,0.16);
+  outline-offset: 2px;
+  box-shadow: 0 10px 30px rgba(43,110,246,0.09);
+}
+
+/* Disabled style (if you choose to disable decrement at 0 via disabled attribute) */
+.button-group button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 420px) {
+  .counter-container {
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .button-group button {
+    min-width: 90px;
+    padding: 9px 12px;
+    font-size: 0.92rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1020;
+    --card-bg: rgba(9, 14, 24, 0.65);
+    --text: #e6eef8;
+    --muted: #9aa6bd;
+    --glass-border: rgba(255,255,255,0.04);
+    --shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+  }
+
+  .counter-container {
+    background: linear-gradient(180deg, rgba(15,20,30,0.6), rgba(10,14,22,0.6));
+    border: 1px solid var(--glass-border);
+  }
+
+  .button-group button:nth-child(2) {
+    background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    color: var(--muted);
+  }
+}
